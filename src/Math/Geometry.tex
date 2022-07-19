@@ -12,7 +12,10 @@
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{tikz}
+\usepackage{graphicx}
 
+% Graphics
+\graphicspath{{./graphics/}}
 % Document
 \begin{document}
 
@@ -44,13 +47,20 @@
                 \2 This indicates that the segment has a mid-point at Z
             \1 Planes/Planer: A two-dimensional flat infinite space
                 \2 Movement left or right location on planar is represented as $(x, y)$
+            \1 Image of Transformation: The form of shape after a transformation
         \end{outline}
         \begin{outline}
-            \1 Rigid Transformation
-            \begin{tikzpicture}
-                \draw[step=1cm,gray,very thin] (-1.9,-1.9) grid (5.9,5.9)
-                \draw[thick,->] (0,0) -- (4.5,0) node[anchor=north west] {x axis};
-                \draw[thick,->] (0,0) -- (0,4.5) node[anchor=south east] {y axis};
-            \end{tikzpicture}
+            \1 Rigid Transformation: Transformation that do not act on the distance between two points in the graph
+            \1 Transformation
+                \2 Translate: Shift entrypoint like this
+                \2 Where $P$ is set an ordered pair of coordinates $(x_n,\ y_n)$
+                \2 For any transformation there can be two modifiers $n$ and $m$
+                \2 The new points can then be represented as $(x_n\ +\ n,\ y_n\ +\ m)$
+            \1 Rotation
+                \2 Pick any arbitrary point either in the set $P$ or on the plane and rotate all points about it
+            \1 Reflection
+                \2 Reflect across a line
+                \2 The line acts as the mid point of symmetry therefore the new Image will be a mirror for of the transformed shape
+
         \end{outline}
 \end{document}
