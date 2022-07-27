@@ -1,0 +1,201 @@
+%! Author = jacobvetere
+%! Date = 7/25/22
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{outlines}
+\usepackage{amsfonts}
+
+\newcolumntype{C}{>$c<$}
+\newcommand{\defline}[2]{\noindent\textbf{\underline{#1}}: #2\\}
+\newcommand{\example}[2]{
+    \begin{equation}
+        #1
+    \end{equation}\caption{#2}\\
+}
+\newcommand{\transitionExamples}[4]{
+    \begin{align*}
+        #1 && \Rightarrow #3\\
+        \text{#2} && \text{#4}
+    \end{align*}
+}
+\newcommand{\transition}[2]{
+    \begin{align*}
+        #1 && \Rightarrow #2\\
+    \end{align*}
+}
+\newcommand{\transitionLine}[1]{
+    \begin{align*}
+        #1 && \Rightarrow
+    \end{align*}
+}
+\newcommand{\arrEntry}[2]{
+    \[
+        #1 & #2\\
+        \hline
+    \]
+}
+% Document
+\begin{document}
+
+    \section{Logic}
+
+        \defline{Logic/Logical Reasoning}{A system for drawing conclusions from a premise}
+
+        \defline{Premise}{Input for logical reasoning, output is conclusion}
+
+        \defline{Conclusion}{Truth dependent outcome}
+
+        \defline{Connectives}{Operators for logical statements}
+
+        \defline{Propositions}{Often referred to as a sentence, it is a declarative expression which is either true or false}
+
+        \defline{Logical Equivalence}{A logically equal expression will have a truth table with the same last row as the comparator}
+
+        \begin{left}
+            \[
+                \begin{array}{|C|C|}
+                    \hline
+                    Def & Math\\
+                    \hline
+                    not & \neg\\
+                    \hline
+                    and & \wedge\\
+                    \hline
+                    or & \vee\\
+                    \hline
+                    if... then ... &  \rightarrow\\
+                    \hline
+                    iff/If and only if... & \leftrightarrow\\
+                    \hline
+                    XOR/Exclusive Or & \#\\
+                    \hline
+                    Universal Quantifier & \forall\\
+                    \hline
+                    Existential Quantifier & \exists\\
+                    \hline
+                \end{array}
+            \]
+        \end{left} \caption{Connectives/Formal Logical Operators}
+
+    \endsection
+
+    \section{Sets}
+
+        \defline{Tautology}{A sentence that is always True such as}
+
+        \begin{equation}
+            p\vee\neg{p}
+        \end{equation}
+
+
+        \defline{Contradiction}{A proposition that is always False}
+
+        \begin{equation}
+            p\wedge\neg{q}
+        \end{equation}
+
+        \defline{Sets}{Informally a collection of elements}
+
+        \defline{Elements}{Objects which are contained in a set}
+        \subsection{Set Notation}
+            \begin{outline}
+                \1 $\{1,2,3,4\}$
+                \1 The set of positive even numbers
+                \1 $\{[3,4],[1,2]\}$
+            \end{outline}
+        \subsection{Common Sets}
+            \begin{left}
+                \[
+                    \begin{array}{|C|C|}
+                        \hline
+                        Symbol & Set\\
+                        \hline
+                        \mathbb{N} & Natural Set \{1,2,3,...\}\\
+                        \hline
+                        \mathbb{Z} & Set of all integers \{x : -\infty-\infty\}\\
+                        \hline
+                        \mathbb{Q} & Set of irrational numbers ie proper and improper functions\\
+                        \hline
+                        \mathbb{R} & Set of Real numbers, decimal\\
+                        \hline
+                        \emptyset & Empty Set\\
+                        \hline
+                    \end{array}
+                \]
+        \end{left}
+    \endsection
+
+    \section{Quantifiers}
+
+        \defline{Quantifiers}{Used to make mathematical language more precise}
+
+        \defline{Universal Quantifier}{$\forall$ means for all, for every or for each}
+
+        \example{(\forall x \in \mathbb{N})(x+1\in \mathbb{N})}{For any value $x$ in the natural set the value $x+1$ is also in the natural set}
+
+        \defline{Existential Quantifier}{$\exists$ means there exists, there is, for some, or there is at least one}
+
+        \example{(\exists x\in\mathbb{N})(x > 5)}{For some value x in the natural set x is greater than 5}
+
+        \defline{Order Of Quantifiers}{Very important for example}
+
+        \example{(\forall x \in \mathbb{N})(\exists x\in \mathbb{N})(y>x)}{For each $x\in\mathbb{N}$, there exists $z\in\mathbb{N}$ such that $y>x$ - Statement 1}
+
+        \example{(\exists y\in\mathbb{N})(\forall x\in\mathbb{N})(y>x)}{There exists $z\in\mathbb{N}$ such that for each $x\in\mathbb{N}$, $y>x$ - Statement 2}
+
+        \defline{Statement 1}{States that given any positive integer there exists a larger integer this is true. Since $\forall$ is before $\exists$ the value $y$ is dependent on x}
+
+        \defline{Statement 2}{States that there is a possible integer which is greater than all others this is false.}
+    \endsection
+
+    \section{Negating Quantified Statements}
+        \defline{Negation}{Let A be a set, for all $x\in A$ let $P(x)$ be the statement}
+
+        \example{\neg(\forall x \in A)(P(x))}{It is false that for all $x\in A$, $P(x)$ is true}
+
+        \example{(\exists x \in A)(\neg P(x))}{There is at least one $x\in A$ for which $P(x)$ is false}
+
+        \subsection{Method for Negating Quantifiers}
+
+        \begin{outline}
+            \1 At front of sentence
+                \2 $\forall \Rightarrow \exists$
+                \2 $\exists \Rightarrow \forall$
+            \2 Negate proposition governed by quantification
+        \end{outline}
+
+        \transitionExamples{(\forall x\in \mathbb{N})(x\in \mathbb{Z})}{For each $x\in \mathbb{N}, x\in \mathbb{Z},$}{(\exists x\in \mathbb{N})(x\notin\mathbb{Z})}{There exists $x\in \mathbb{N}$ where $x\notin \mathbb{Z}$}
+        
+        \transition{(\forall x \in \mathbb{Z})(\exists y\in \mathbb{Z})(x+y=0)}{(\exists x\in \mathbb{Z})(\forall y\in \mathbb{Z})(x+y\ne 0)}
+
+        \transition{(\forall x\in \mathbb{Q})(\forall y\in \mathbb{Q})(x>y) \rightarrow (\exists x\in \mathbb{Q})(x>z>y)}
+        {\\\\(\exists x\in \mathbb{Q})(\exists x\in \mathbb{Q})((x>y)\wedge(\forall z\in \mathbb{Q}((x\leq z)\vee(z\leq y))))}
+        Explanation Pg 16
+
+        \begin{left}
+            \[
+                \begin{array}{|C|C|}
+                    \hline
+                    Start & End\\
+                    \hline
+                    \neg (p \rightarrow q) & p\wedge \neg q\\
+                    \hline
+                    \neg (p > q) & p \leq q\\
+                    \hline
+                    \forall & \exists\\
+                    \hline
+                    \exists & \forall\\
+                    \hline
+                    \in & \notin\\
+                    \hline
+                \end{array}
+            \]
+        \end{left}
+    \endsection
+
+\end{document}

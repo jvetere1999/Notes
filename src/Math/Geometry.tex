@@ -16,6 +16,8 @@
 
 % Graphics
 \graphicspath{{./graphics/}}
+
+\newcommand{\defline}[2]{\noindent\textbf{\underline{#1}}: #2\\}
 % Document
 \begin{document}
 
@@ -23,10 +25,10 @@
         `The laws of nature are but the mathematical though of god` - Euclid
         \subsection{Terms and Labels}
         \begin{outline}[enumerate]
-            \1 Point: Ordered pair of numbers representing a point on a plane
+            \1 \defline{Point}{Ordered pair of numbers representing a point on a plane}
                 \2 (x,y) where x is the value along the horizontal axis and y is the value on the vertical axis
                 \2 0 Dimensions
-            \1 Line segment: Line connecting two ordered pairs
+            \1 \defline{Line segment}{Line connecting two ordered pairs}
                 \2 If A and B are points on the same plane then $\overline{AB}$ is the direct path between Point A and Point B
                 \2 1 Dimension
                 \2 No width only length
