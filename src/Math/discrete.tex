@@ -2,16 +2,29 @@
 %! Date = 7/25/22
 
 % Preamble
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 
-% Packages
+
+\usepackage[english]{babel}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{array}
 \usepackage{outlines}
-\usepackage{amsfonts}
+\usepackage{mathtools}
 
 \newcolumntype{C}{>$c<$}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\renewcommand\qedsymbol{QED}
+
+\usepackage{enumitem}
+\setlist[enumerate,2]{label=\roman*)}
+\setlist[enumerate,3]{label=\alph*)}
+
 \newcommand{\defline}[2]{\noindent\textbf{\underline{#1}}: #2\\}
+\newcommand{\theorem}[2]{\noindent\textbf{\underline{Theorem #1}}: #2\\}
 \newcommand{\example}[2]{
     \begin{equation}
         #1
@@ -38,6 +51,30 @@
         #1 & #2\\
         \hline
     \]
+}
+\newcommand{\setBuilder}[3]{
+    $\{\isIn{#1}{#2}\ |\ #3\}$
+}
+\newcommand{\isIn}[2]{
+    $#1\in #2$
+}
+\newcommand{\contradiction}{$\rightarrow\leftarrow$}
+\newcommand{\symbolicexample}[3]{
+    \begin{theorem}
+        #1
+    \end{theorem}
+
+    \\\\
+    Initial Proposition
+    \begin{equation}
+        #2
+    \end{equation}
+
+    \\\\
+    Negated proposition
+    \begin{equation}
+        #3
+    \end{equation}
 }
 % Document
 \begin{document}
@@ -77,6 +114,12 @@
                     Universal Quantifier & \forall\\
                     \hline
                     Existential Quantifier & \exists\\
+                    \hline
+                    Improper Subset & \subseteq\\
+                    \hline
+                    Proper Subset & \subset\\
+                    \hline
+                    Contradiction & \rightarrow\leftarrow\\
                     \hline
                 \end{array}
             \]
@@ -197,5 +240,193 @@
             \]
         \end{left}
     \endsection
+    \section{Subsets and Set Builder Notation}
+        \subsection{Subsets}
+            \defline{Subsets}{Let $A$ and $B$ be sets. $A$ is a subset of $B$ if (and only if) for all $x\in A$, $x\in B$.
+            This is stated as $A$ is a subset of $B$}
 
+            \example{(\forall x \in A)(x\in A)\leftrightarrow(x\in B)}{}
+
+            \defline{Note}{If can be used inplace of if and only if}
+
+            \defline{Not a Subset}{$A\not\subseteq B$. There exists some $x\in A$ for which $x\notin B$ then $A\not\subseteq B$ or rather}
+            \example{(\exists x\in A)(x\notin B)\leftrightarrow(A\not\subseteq B)}{Not a subset of B}
+
+            \defline{Set Builder Notation}{Let $A$ be a set, for all $x\in A$, let $P(x)$ be a proposition about $x$ we can write this set as}
+            \example{S = \{x\in A | P(x)\}}{The set of all $x\in A$ such that $P(x)$}
+
+            \example{B = \{1, 2,...,5\} \Rightarrow B = \{x\in \mathbb{N}\ |\ x\leq 5\}}{}
+
+            \example{E =\{x\in N\ |\ (\exists k\inZ)(n=2k)\}}{Let $E$ be the set of all even positive integers}
+
+            \example{\emptyset = \{x\in\mathbb{N}\ |\ (x > 2)^(x < 2)\}}{Empty Set}
+
+            \defline{Universe of Discourse}{Any set used in a discussion are subsets of some set $\mathbb{X}$. ie Calc $\rightarrow R$}
+
+            Let $\mathbb{X}$ be a Universe of Discourse and let $(A\subseteq \mathbb{X}) \wedge (B\subseteq \mathbb{X})$\\
+
+            \defline{Intersection}{Denoted as $A\cap B$, it is the set $\{x\in \mathbb{X}\ |\ x\in A \wedge x\in B\}$}
+
+            \defline{Union}{$A \cup B$ is denoted as $\{x\in \mathbb{X}\ |\ x\in A \vee x\in B\}$}
+
+            \defline{Relative Complement}{The relative complement of B in A, denoted as $A - B$ is the set $\{x\in \mathbb{X}\ |\ x\in A \wedge x\notin B\}$}
+
+            \defline{Complement of a Universe of Discourse}
+            {Let $\mathbb{X}$ be a known Universe of Discourse and let $A\subseteq \mathbb{X}$. The relative complement of $A$ in $\mathbb{X}$ s just called the complement and denoted as $A^c$}
+
+            \subsection{Set Op Examples}
+                Let $X = \{1, 2, 3, 4, 5, 7, 8\}$, let $A = \{1, 3, 5\}$ and let $B = \{5, 9\}$ then\\
+
+                \\$A \cap B = \{5\}$
+
+                \\$A \cup B = \{1, 3, 5, 9\}$
+
+                \\$A - B = \{1,3\}$
+
+                \\$B - A = \{9\}$
+
+                \\$A^c =\{7, 9\}$
+
+                \\$B^c = \{1, 3,7\}$\\
+
+
+            \defline{Set Equality}{Set $A$ and $B$ are equal if and only if $A\subseteq B$ and $B \subseteq A$. In other words, $(A\subseteq B \wedge B\subseteq A) \iff (A = B)$}
+
+    \newpage
+
+    \section{Proof By Contradiction}
+        \begin{theorem}
+            For every set $A$, $\emptyset\subseteq A$
+        \end{theorem}
+        \begin{proof}
+            By way of contradiction.
+            Suppose there exists a set $A$ such that $\emptyset\not\subseteq A$, since $\emptyset\not\subseteq A$ there exists $x\in\emptyset$ such that $x\notin A$
+            However the set $\emptyset$ contains no elements hence $x\notin \emptyset$ and $x\in \emptyset$.
+            Therefore \contradiction.
+            Our hypothesis has led to a contradiction and is therefore false.
+            Thus for every set $A$, $\emptyset\subseteq A$.
+        \end{proof}
+        \begin{outline}
+            \1 $(\exists A)(\emptyset\not\subseteq A)\Rightarrow$
+            \1 $(\emptyset\not\subseteq A)\rightarrow(\exists x\in \emptyset)(x\notin A)\Rightarrow$
+            \1 $(\forall x\in \mathbb{X})(x\notin \emptyset)$
+            \1 $(x\in \emptyset)(x\notin\emptyset)$ is a \contradiction
+        \end{outline}
+        \subsection{Process of Proof By Contradiction}
+            \defline{Proof by Contradiction}{Negate the proposition and find a contraction.
+            Can be denoted as $(\neg P \rightarrow C)\rightarrow P$}
+
+            \defline{$(\neg P \rightarrow C)\rightarrow P$}{A tautology can be used as a formal equation of sorts for an indirect proof.
+            It states that: We assume $\neg P$ and show that $\neg P\rightarrow C$ where $C$ is a formal contradiction that proves the preposition.}
+
+            \defline{QED Quod Erat Demonstrandum}{Latin for proof is finished}
+
+            \begin{outline}[enumerate]
+                \1 Statement of Process: By way of contradiction
+                \1 Negation of Preposition: Negate logical preposition that is to be proved
+                    \2 $(\forall A)(\emptyset\not\subseteq A) \xRightarrow{\neg}$
+                        \3 Original preposition
+                    \2 $(\exists A)(\emptyset\not\subseteq A)$
+                        \3 Negation
+                \1 Create logic chain to contradiction utilizing a negation of P if C implies P: $(\neg P \rightarrow C)\rightarrow P$
+                \1 Restate Initial proposition
+            \end{outline}
+            \begin{theorem}
+                For all sets $A$ and $B$, if $A\subseteq A\cap B$ then $A\cup B \subseteq B$
+            \end{theorem}
+
+            Initial Proposition
+            \begin{equation}
+                (\forall A)(\forall B)(A\subseteq A\cap B)\rightarrow(A\cup B \subseteq B)
+            \end{equation}
+
+            Negated Proposition
+            \begin{equation}
+                (\exists A)(\exists B)(A\subseteq A\cap B)\wedge (A\cup B \not\subseteq B)
+            \end{equation}
+            \begin{proof}
+                By way of contradiction, there exists some set A and B for which $A\subseteq A\cap B$ and $A\cup B \not\subseteq B$.
+                Since $A\cup B \not\subseteq B$ this implies that there exists $x\in A\cup B$ such that $x\notin B$.
+                Since $x\in A\cup B$, $x\in A$ or $x\in B$.
+                \\\\
+                \defline{Case 1}{}
+                Suppose that $x\in A$.
+                Since $x\in A$ and $A\subseteq A\cap B$, $x\in A\cap B$.
+                Since $x\in A\cap B$, $x\in A$ and $x\in B$.
+                Thus $x\in B$. but by the choice of $x$, $x\notin B$. \contradiction`
+                \\\\
+                \defline{Case 2}{}
+                Suppose $x\in B$.
+                By the choice of $x$, $x\notin B$.
+                Thus $x\in B$ and $x\notin B$ is a contraction \contradiction
+                \\\\
+                In both cases, our hypothesis has led to a contraction and is therefore false.
+                Thus for all sets $A$ and $B$, if $A\subseteq A\cap B$ then $A\cup B\subseteq B$.
+            \end{proof}
+
+            \begin{outline}
+                \1 $A \cup B\not\subseteq B\rightarrow (\exists x\in A\cup B )(x\notin B)$
+                \1 $(x\in A\cup B)\rightarrow (x\in A)\vee (x\in B)$
+                \1 Case 1:
+                    \2 $(x\in A)\wedge (A\subseteq A\cap B) \rightarrow (x\in A\cap B)$
+                    \2 $(x\in A\cap B)\rightarrow(x\in A)\wedge (x\in B)$
+                    \2 Choice $x\notin B$ \contradiction $(x\in A)\wedge (x\in B)$
+                \1 Case 2:
+                    \2 $x\in B$ \contradiction Choice of $x\notin B$
+                \1 $(\neg P \rightarrow C) \rightarrow P$
+            \end{outline}
+
+            \subsection{Examples}
+                For each theorem, write the opening lines of a proof by contradiction.
+                My challenge: Work and record the logical derivation to the contradiction and write the entire proof.
+                \subsubsection{Problem 1}
+                \symbolicexample{For all sets $A$ and $B$, if $A\subseteq B$ then $A-B=\emptyset$}
+                {(\forall A)(\forall B)(A\subseteq B)\rightarrow (A-B=\emptyset)}
+                {(\exists A)(\exists B)(A\subseteq B)\wedge (A-B\ne\emptyset)}
+
+                Logical Derivation
+                \begin{outline}
+                    \1 $(\exists A)(\exists B)(A\subseteq B)\wedge (A-B\ne\emptyset)$
+                        \2 $(A\subseteq B) \Rightarrow (x\in A)\leftrightarrow(x\in B)$
+                        \2 $(A-B\ne\emptyset)\Rightarrow (x\in A)\wedge (x\notin B)$
+                    \1 $((x\in A)\leftrightarrow(x\in B)) \wedge ((x\in A)\wedge (x\notin B))$`
+                    \1 $x\in A \rightarrow (x\in B)$ \contradiction $(x\notin B)$
+                \end{outline}
+                \\\\
+                \begin{proof}
+                    By way of contradiction, there exists sets $A$ and $B$ such that $A\subseteq B$ and $A-B\ne \emptyset$.
+                    Since $A\subseteq B$ implies that $x\in A$ if and only if $x\in B$.
+                    Since $A-B\ne \emptyset$ this implies $x\in A$ and $x\notin B$.
+                    \\\\
+                    Now suppose $x\in A$ such that $x\in B$ and $x\notin B$.
+                    This is a contradiction \contradiction.
+                    Therefore, For all sets $A$ and $B$, if $A\subseteq B$, then $A-B=\emptyset$
+                \end{proof}
+                \\\\\\
+
+                \subsubsection{Problem 2}
+                \symbolicexample{For all sets $A$, $B$ and $C$, if $A\subseteq C$ and $B\subseteq C$ then $A\cup B \not\subseteq C$}
+                {(\forall A)(\forall B)(\forall C)\ ((A\subseteq C)\wedge (B\subseteq C))\rightarrow (A\cup B \subseteq C)}
+                {(\exists A)(\exists B)(\exists C)\ (A\subseteq C)\wedge (B\subseteq C)\wedge (A\cup B \not\subseteq C)}
+
+
+    Logical Derivation
+                \begin{outline}
+                    \1 $(\exists A)(\exists B)(\exists C)\ (A\subseteq C)\wedge (B\subseteq C)\wedge (A\cup B \not\subseteq C)$
+                        \2 $A\subseteq C\Rightarrow (x\in A)\leftrightarrow(x\in C)$
+                        \2 $B\subseteq C\Rightarrow (x\in B)\leftrightarrow(x\in C)$
+                        \2 $A\cup B \not\subseteq C\Rightarrow (x\in A\cup B)\leftrightarrow(x\notin C)$
+                            \3 $\Rightarrow (x\in A)\wedge (x\in B)\leftrightarrow(x\notin C)$
+                    \1 $(x\in A)\leftrightarrow(x\in C) \wedge (x\in B)\leftrightarrow(x\in C) \wedge (x\in A)\wedge (x\in B)\leftrightarrow(x\notin C)$
+                    \1 $x\in A ^ x\in B \Rightarrow x\in C$ \contradiction $x\notin C$
+                \end{outline}
+                \\\\
+                \begin{proof}
+                    By way of contradiction, there exists sets $A$, $B$ and $C$ such that $A\subseteq C$ and $B\subseteq C$ and $A\cup B \not\subseteq C$.
+                    Since $A\subseteq C$ then $x\in A$ if and only if $x\in C$, as well $B\subseteq C$ means that $x\in B$ if and only if $x\in C$.
+                    However, since $A\cup B\not\subseteq C$, $x\in A \wedge x\in B$ if and only if $x\notin C$ which causes a contradiction. \contradiction
+                    \\\\
+                    Therefore, by contradiction, for all sets $A, B \text{ and }C$ if $A\subseteq C$ and $B\subseteq C$ then $A\cup B\subseteq C$.
+                \end{proof}
+    \endsection
 \end{document}
